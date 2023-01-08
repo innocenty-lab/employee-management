@@ -4,11 +4,11 @@
 </mat-toolbar>
 
 <div class="container">
-  <button mat-raised-button color="primary" class="mt-4" (click)="openDialog()">Add Employee</button>
+  <button mat-raised-button color="primary" class="mt-4" (click)="onOpenDialog()">Add Employee</button>
 
   <mat-form-field class="mt-4">
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="onApplyFilter($event)" placeholder="Ex. Mia" #input>
   </mat-form-field>
 
   <div class="mat-elevation-z8 overflow-auto">
@@ -72,13 +72,13 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
         <td mat-cell *matCellDef="let row" class="d-flex flex-row">
-          <button mat-fab color="primary" (click)="detailEmployee(row)">
+          <button mat-fab color="primary" (click)="onDetailEmployee(row)">
             <mat-icon>file_open</mat-icon>
           </button>
-          <button mat-fab color="accent" class="detail-btn" (click)="editEmployee(row)">
+          <button mat-fab color="accent" class="detail-btn" (click)="onEditEmployee(row)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-fab color="warn" (click)="deleteProduct(row.id)">
+          <button mat-fab color="warn" (click)="onDeleteProduct(row.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

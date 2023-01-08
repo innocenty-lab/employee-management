@@ -20,7 +20,7 @@
       <!--      <input formControlName="email" matInput placeholder="pat@example.com" [formControl]="email" required>-->
       <!--      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
       <input type="email" formControlName="email" matInput placeholder="pat@example.com">
-      <mat-error>{{getErrorMessage()}}</mat-error>
+      <mat-error>{{onGetErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Birth Date</mat-label>
@@ -64,12 +64,12 @@
 <div mat-dialog-actions [align]="'end'">
   <button mat-raised-button color="warn" class="m-2" mat-dialog-close>Close</button>
   <div *ngIf="isLoading">
-    <button mat-raised-button color="primary" (click)="addEmployee()" disabled="{{isLoading}}">
+    <button mat-raised-button color="primary" (click)="onAddEmployee()" disabled="{{isLoading}}">
       <mat-spinner color="primary" diameter="20">
       </mat-spinner>
     </button>
   </div>
   <div *ngIf="!isLoading">
-    <button mat-raised-button color="primary" (click)="addEmployee()" disabled="{{isLoading}}">{{actionBtn}}</button>
+    <button mat-raised-button color="primary" (click)="onAddEmployee()" disabled="{{isLoading}}">{{actionBtn}}</button>
   </div>
 </div>

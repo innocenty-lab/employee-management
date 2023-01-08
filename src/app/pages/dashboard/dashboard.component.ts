@@ -33,22 +33,22 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getALlEmployees();
+    this.onGetALlEmployees();
     // console.log("isLoggedIn: ", this.authGuard.isLoggedIn);
   }
 
-  openDialog() {
+  onOpenDialog() {
     this.dialog.open(DialogComponent, {
       width: '40%'
     })
       .afterClosed().subscribe(value => {
       if (value === 'save') {
-        this.getALlEmployees();
+        this.onGetALlEmployees();
       }
     });
   }
 
-  getALlEmployees() {
+  onGetALlEmployees() {
     this.employeeServ.getEmployee()
       .subscribe({
         next: (res) => {
@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit {
       })
   }
 
-  applyFilter(event: Event) {
+  onApplyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -76,19 +76,19 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  editEmployee(row: any) {
+  onEditEmployee(row: any) {
     this.dialog.open(DialogComponent, {
       width: '40%',
       data: row
     })
       .afterClosed().subscribe(value => {
       if (value === 'update') {
-        this.getALlEmployees();
+        this.onGetALlEmployees();
       }
     })
   }
 
-  deleteProduct(id: number) {
+  onDeleteProduct(id: number) {
     Swal.fire({
       title: 'Are you sure to delete?',
       icon: 'warning',
@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
                 title: 'Success',
                 text: 'Employee delete successfully',
               })
-              this.getALlEmployees();
+              this.onGetALlEmployees();
             },
             error: () => {
               Swal.fire({
@@ -120,7 +120,7 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  detailEmployee(row: any) {
+  onDetailEmployee(row: any) {
     this.router.navigate(['employee-detail'], {state: row});
   }
 

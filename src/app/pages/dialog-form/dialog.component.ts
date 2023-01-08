@@ -55,23 +55,23 @@ export class DialogComponent implements OnInit {
       this.employeeForm.controls['description'].setValue(this.editData.description);
     }
 
-    this.getAllGroup();
+    this.onGetAllGroup();
   }
 
-  getErrorMessage() {
+  onGetErrorMessage() {
     return this.employeeForm.controls['email'].status == 'INVALID' ? 'Not a valid email' : '';
   }
 
-  getAllGroup() {
+  onGetAllGroup() {
     this.groupServ.getGroup().subscribe((res) => {
       this.groupList = res;
       // console.log(this.groupList);
     });
   }
 
-  addEmployee() {
+  onAddEmployee() {
     if (!this.editData) {
-      this.getErrorMessage()
+      this.onGetErrorMessage()
       if (this.employeeForm.valid) {
         this.isLoading = true;
         this.employeeServ.postEmployee(this.employeeForm.value)
@@ -97,11 +97,11 @@ export class DialogComponent implements OnInit {
           });
       }
     } else {
-      this.updateEmployee();
+      this.onUpdateEmployee();
     }
   }
 
-  updateEmployee() {
+  onUpdateEmployee() {
     this.isLoading = true;
     this.employeeServ.putEmployee(this.editData.id, this.employeeForm.value)
       .subscribe({
