@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   field: typeof LoginField = LoginField;
   showPassword: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private readonly authService: AuthService,
@@ -51,17 +52,22 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     // console.log("cek data submit: ", this.loginForm.value);
     const payload = this.loginForm.value;
-    const token: LoginToken | null = this.authService.login(payload);
-    if (token) {
-      this.authGuard.isLoggedIn = true;
-      this.router.navigateByUrl('dashboard');
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Incorrect email or password',
-      });
-    }
+    this.isLoading = true;
+    setTimeout(() => {
+      const token: LoginToken | null = this.authService.login(payload);
+      if (token) {
+        this.authGuard.isLoggedIn = true;
+        this.isLoading = false;
+        this.router.navigateByUrl('dashboard');
+      } else {
+        this.isLoading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Incorrect email or password',
+        });
+      }
+    }, 3000);
   }
 
   isFieldValid(loginField: LoginField): string {

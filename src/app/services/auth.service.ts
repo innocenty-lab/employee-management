@@ -25,8 +25,9 @@ export class AuthService {
       const token: LoginToken = {token: '12345'};
       this.sessionService.set(AUTH_KEY, JSON.stringify(token));
       return token;
+    } else {
+      return null;
     }
-    return null;
   }
 
   logout() {

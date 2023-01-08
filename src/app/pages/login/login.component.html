@@ -35,9 +35,18 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" class="w-100" [disabled]="!loginForm.valid"
-              (click)="onSubmit()">SignIn
-      </button>
+      <div *ngIf="isLoading" class="w-100">
+        <button mat-raised-button color="primary" type="submit" class="w-100" [disabled]="isLoading"
+                (click)="onSubmit()">
+          <mat-spinner color="primary" diameter="20">
+          </mat-spinner>
+        </button>
+      </div>
+      <div *ngIf="!isLoading" class="w-100">
+        <button mat-raised-button color="primary" type="submit" class="w-100" [disabled]="!loginForm.valid"
+                (click)="onSubmit()">SignIn
+        </button>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>
